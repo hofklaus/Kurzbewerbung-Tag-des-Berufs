@@ -19,9 +19,7 @@
       --shadow: 0 18px 40px rgba(18,24,40,.10);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -425,7 +423,7 @@
       <div class="hero-bar"></div>
       <div class="hero-inner">
         <h1>Kurzbewerbung – Tag des Berufs</h1>
-        <p>Erstelle deine Kurzbewerbung und lade sie als PNG herunter.</p>
+        <p>Erstelle deine Kurzbewerbung und speichere oder teile sie direkt auf deinem Handy.</p>
       </div>
     </div>
 
@@ -469,7 +467,7 @@
         <div class="hint">Das Foto wird nur lokal angezeigt und in die exportierte PNG-Datei übernommen.</div>
 
         <div class="actions">
-          <button class="primary" id="pngBtn" type="button">Karte als PNG herunterladen</button>
+          <button class="primary" id="saveBtn" type="button">Karte speichern / teilen</button>
           <button class="secondary" id="resetBtn" type="button">Zurücksetzen</button>
         </div>
       </div>
@@ -527,7 +525,7 @@
     </div>
 
     <div class="footer-note">
-      Lege für GitHub einfach <strong>index.html</strong> und <strong>logo.png</strong> in dasselbe Repository.
+      Öffne für Schüler immer die veröffentlichte GitHub-Pages-Seite, nicht das Repository selbst.
     </div>
   </div>
 
@@ -636,24 +634,49 @@
       reader.readAsDataURL(file);
     });
 
-    async function downloadCard() {
+    async function createBlobFromCard() {
       syncCard();
-
       const card = document.getElementById('card');
-
       const canvas = await html2canvas(card, {
         scale: 2,
         backgroundColor: '#ffffff',
         useCORS: true
       });
-
-      const link = document.createElement('a');
-      link.download = buildFilename();
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+      return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
     }
 
-    document.getElementById('pngBtn').addEventListener('click', downloadCard);
+    async function saveOrShareCard() {
+      const blob = await createBlobFromCard();
+      if (!blob) return;
+
+      const filename = buildFilename();
+      const file = new File([blob], filename, { type: 'image/png' });
+
+      if (navigator.canShare && navigator.share) {
+        try {
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              files: [file],
+              title: 'Kurzbewerbung – Tag des Berufs',
+              text: 'Meine Kurzbewerbung als PNG'
+            });
+            return;
+          }
+        } catch (e) {
+        }
+      }
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('saveBtn').addEventListener('click', saveOrShareCard);
 
     document.getElementById('resetBtn').addEventListener('click', () => {
       nameInput.value = '';
