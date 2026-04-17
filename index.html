@@ -1,183 +1,180 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kurzbewerbung – Tag des Berufs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurzbewerbung – Tag des Berufs</title>
 
-  <style>
-    :root {
-      --violett: #332f87;
-      --orange: #f97316;
-      --bg: #f5f7fb;
-      --card: #ffffff;
-      --line: #dde3ec;
-      --text: #17212b;
-      --muted: #667085;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  padding: 16px;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      padding: 16px;
-    }
+.wrap {
+  max-width: 1000px;
+  margin: auto;
+}
 
-    .wrap {
-      max-width: 1100px;
-      margin: auto;
-    }
+h1 {
+  text-align: center;
+  color: #332f87;
+}
 
-    h1 {
-      text-align: center;
-      color: var(--violett);
-    }
+.grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 16px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: 350px 1fr;
-      gap: 16px;
-    }
+.panel, .preview {
+  background: white;
+  border-radius: 20px;
+  padding: 16px;
+  border: 1px solid #ddd;
+}
 
-    .panel, .preview {
-      background: white;
-      border-radius: 20px;
-      padding: 16px;
-      border: 1px solid var(--line);
-    }
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
 
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
+button {
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #332f87;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
 
-    button {
-      margin-top: 15px;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: var(--violett);
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-    }
+/* 🔥 LOGO BEREICH */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+}
 
-    .brand-logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-    }
+.brand-text {
+  font-size: 12px;
+  font-weight: bold;
+  color: #667085;
+}
 
-    .card {
-      padding: 10px;
-    }
+/* KARTE */
+.name {
+  font-size: 24px;
+  color: #332f87;
+  font-weight: bold;
+}
 
-    .name {
-      font-size: 24px;
-      color: var(--violett);
-      font-weight: bold;
-    }
+.meta {
+  color: #555;
+  margin-top: 5px;
+}
 
-    .chip {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 20px;
-      background: #eef2f8;
-      margin: 5px 5px 5px 0;
-      font-size: 13px;
-    }
-  </style>
+.chip {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #eef2f8;
+  margin: 5px 5px 0 0;
+  font-size: 13px;
+}
+</style>
 </head>
 
 <body>
 
 <div class="wrap">
-  <h1>Kurzbewerbung – Tag des Berufs</h1>
+<h1>Kurzbewerbung – Tag des Berufs</h1>
 
-  <div class="grid">
+<div class="grid">
 
-    <!-- FORMULAR -->
-    <div class="panel">
+<!-- FORMULAR -->
+<div class="panel">
 
-      <label>Dein Name</label>
-      <input id="name">
+<label>Dein Name</label>
+<input id="name">
 
-      <label>Deine Schule</label>
-      <select id="school">
-        <option value="">Bitte auswählen</option>
-        <option>Friedrich-List-Schule</option>
-        <option>Emil-Possehl-Schule</option>
-      </select>
+<label>Deine Schule</label>
+<select id="school">
+<option value="">Bitte auswählen</option>
+<option>Friedrich-List-Schule</option>
+<option>Emil-Possehl-Schule</option>
+</select>
 
-      <label>Dein Abschluss (voraussichtlich)</label>
-      <input id="abschluss">
+<label>Dein Abschluss (voraussichtlich)</label>
+<input id="abschluss">
 
-      <label>Kontakt</label>
-      <input id="contact">
+<label>Kontakt</label>
+<input id="contact">
 
-      <label>Ich suche</label>
-      <select id="interest">
-        <option value="">Bitte auswählen</option>
-        <option>Praktikum</option>
-        <option>Ausbildung</option>
-        <option>Duales Studium</option>
-      </select>
+<label>Ich suche</label>
+<select id="interest">
+<option value="">Bitte auswählen</option>
+<option>Praktikum</option>
+<option>Ausbildung</option>
+<option>Duales Studium</option>
+</select>
 
-      <label>Ab wann / Zeitraum</label>
-      <input id="time">
+<label>Ab wann / Zeitraum</label>
+<input id="time">
 
-      <label>Beruf oder Bereich</label>
-      <input id="career">
+<label>Beruf oder Bereich</label>
+<input id="career">
 
-      <label>Foto (optional)</label>
-      <input id="photo" type="file">
+<button onclick="download()">Karte herunterladen</button>
 
-      <button onclick="download()">Karte herunterladen</button>
+</div>
 
-    </div>
+<!-- VORSCHAU -->
+<div class="preview">
 
-    <!-- VORSCHAU -->
-    <div class="preview">
-      <div class="brand">
-        <img src="logo.png" class="brand-logo">
-        <div>Tag des Berufs</div>
-      </div>
+<div class="brand">
+<img src="logo.png" class="brand-logo">
+<div class="brand-text">Tag des Berufs</div>
+</div>
 
-      <div class="card">
-        <div id="intro">
-          Hallo, ich habe Sie am Tag des Berufs kennengelernt.
-        </div>
+<div id="intro">
+Hallo, ich habe Sie am Tag des Berufs kennengelernt.
+</div>
 
-        <div class="name" id="v_name">—</div>
+<div class="name" id="v_name">—</div>
 
-        <div id="v_meta">—</div>
+<div class="meta" id="v_meta">—</div>
 
-        <div>
-          <span class="chip" id="v_interest">—</span>
-          <span class="chip" id="v_time">—</span>
-          <span class="chip" id="v_career">—</span>
-        </div>
-      </div>
-    </div>
+<div>
+<span class="chip" id="v_interest">—</span>
+<span class="chip" id="v_time">—</span>
+<span class="chip" id="v_career">—</span>
+</div>
 
-  </div>
+</div>
+
+</div>
 </div>
 
 <canvas id="canvas" width="1200" height="700" style="display:none;"></canvas>
@@ -185,7 +182,7 @@
 <script>
 function val(id){
   let v=document.getElementById(id).value;
-  return v? v : "—";
+  return v ? v : "—";
 }
 
 function update(){
