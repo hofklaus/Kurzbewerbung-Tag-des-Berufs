@@ -100,7 +100,6 @@
     }
 
     input,
-    textarea,
     select {
       width: 100%;
       border: 1px solid #cfd7e4;
@@ -113,16 +112,10 @@
     }
 
     input:focus,
-    textarea:focus,
     select:focus {
       border-color: var(--violett);
       box-shadow: 0 0 0 3px rgba(51,47,135,.10);
       outline: none;
-    }
-
-    textarea {
-      min-height: 84px;
-      resize: vertical;
     }
 
     .hint {
@@ -139,8 +132,7 @@
       margin-top: 16px;
     }
 
-    button,
-    .mail-btn {
+    button {
       border: none;
       border-radius: 14px;
       padding: 13px 14px;
@@ -148,10 +140,6 @@
       font-weight: 700;
       font-family: inherit;
       cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .primary {
@@ -164,12 +152,6 @@
       background: #eef2f8;
       color: var(--text);
       flex: 1 1 160px;
-    }
-
-    .mail-btn {
-      background: #eef2f8;
-      color: var(--text);
-      flex: 1 1 180px;
     }
 
     .preview-shell {
@@ -242,7 +224,7 @@
 
     .head {
       display: grid;
-      grid-template-columns: 88px 1fr;
+      grid-template-columns: 96px 1fr;
       gap: 14px;
       align-items: start;
       margin-bottom: 16px;
@@ -251,9 +233,9 @@
     }
 
     .avatar {
-      width: 88px;
-      height: 88px;
-      border-radius: 22px;
+      width: 96px;
+      height: 96px;
+      border-radius: 24px;
       background: var(--soft);
       border: 1px solid var(--line);
       display: flex;
@@ -270,6 +252,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: none;
     }
 
@@ -378,14 +361,6 @@
       .grid {
         grid-template-columns: 1fr;
       }
-
-      .panel {
-        order: 1;
-      }
-
-      .preview-shell {
-        order: 2;
-      }
     }
 
     @media (max-width: 640px) {
@@ -415,13 +390,13 @@
       }
 
       .head {
-        grid-template-columns: 72px 1fr;
+        grid-template-columns: 76px 1fr;
         gap: 10px;
       }
 
       .avatar {
-        width: 72px;
-        height: 72px;
+        width: 76px;
+        height: 76px;
         border-radius: 18px;
       }
 
@@ -438,8 +413,7 @@
       }
 
       .primary,
-      .secondary,
-      .mail-btn {
+      .secondary {
         width: 100%;
       }
     }
@@ -451,7 +425,7 @@
       <div class="hero-bar"></div>
       <div class="hero-inner">
         <h1>Kurzbewerbung – Tag des Berufs</h1>
-        <p>Erstelle deine Kurzbewerbung und lade sie als PNG herunter oder öffne direkt eine vorbereitete E-Mail.</p>
+        <p>Erstelle deine Kurzbewerbung und lade sie als PNG herunter.</p>
       </div>
     </div>
 
@@ -496,7 +470,6 @@
 
         <div class="actions">
           <button class="primary" id="pngBtn" type="button">Karte als PNG herunterladen</button>
-          <a href="#" class="mail-btn" id="mailBtn">E-Mail öffnen</a>
           <button class="secondary" id="resetBtn" type="button">Zurücksetzen</button>
         </div>
       </div>
@@ -571,7 +544,6 @@
     const previewPhoto = document.getElementById('previewPhoto');
     const photoPlaceholder = document.getElementById('photoPlaceholder');
     const photoInput = document.getElementById('photoInput');
-    const mailBtn = document.getElementById('mailBtn');
 
     function applicationText(interest) {
       const v = String(interest || '').toLowerCase();
@@ -606,47 +578,6 @@
       return `${nameVal}_${careerVal}.png`;
     }
 
-    function buildMailLink() {
-      const nameVal = nameInput.value.trim();
-      const schoolVal = schoolInput.value.trim();
-      const abschlussVal = abschlussInput.value.trim();
-      const abschlussWannVal = abschlussWannInput.value.trim();
-      const contactVal = contactInput.value.trim();
-      const interestVal = interestInput.value.trim();
-      const timeframeVal = timeframeInput.value.trim();
-      const careerVal = careerInput.value.trim();
-
-      const subjectName = nameVal || 'Kurzbewerbung';
-      const subject = `Kurzbewerbung – Tag des Berufs – ${subjectName}`;
-
-      const bodyLines = [
-        'Guten Tag,',
-        '',
-        applicationText(interestVal),
-        '',
-        'Meine Angaben in Kurzform:',
-        `Name: ${nameVal || '—'}`,
-        `Schule: ${schoolVal || '—'}`,
-        `Abschluss (voraussichtlich): ${abschlussVal || '—'}`,
-        `Wann mache ich meinen Abschluss: ${abschlussWannVal || '—'}`,
-        `Kontakt: ${contactVal || '—'}`,
-        `Ich suche: ${interestVal || '—'}`,
-        `Ab wann / Zeitraum: ${timeframeVal || '—'}`,
-        `Beruf oder Bereich: ${careerVal || '—'}`,
-        '',
-        'Im Anhang finden Sie meine Kurzbewerbung als PNG.',
-        '',
-        'Mit freundlichen Grüßen',
-        nameVal || ''
-      ];
-
-      mailBtn.href =
-        'mailto:?subject=' +
-        encodeURIComponent(subject) +
-        '&body=' +
-        encodeURIComponent(bodyLines.join('\\n'));
-    }
-
     function syncCard() {
       const nameVal = fillOrDash(nameInput.value);
       const schoolVal = fillOrDash(schoolInput.value);
@@ -671,8 +602,6 @@
       document.getElementById('v_contact').textContent = contactVal;
       document.getElementById('v_shortinfo').textContent = intro;
       document.getElementById('introText').textContent = intro;
-
-      buildMailLink();
     }
 
     [
